@@ -1,8 +1,16 @@
-FROM ubuntu:22.04
+FROM python:3.9-slim
 
-RUN apt-get update && apt-get install -y \
-    openssh-client \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+RUN pip install flask requests
 
-CMD ["ssh", "-o", "ServerAliveInterval=60", "-R", "4444:localhost:4444", "serveo.net"]
+WORKDIR /app
+
+RUN echo 'from flask import Flask\n\
+import requests\n\
+app = Flask(__name__)\n\
+@app.route("/")\n\
+def index():\n\
+    return "Service is running!"\n\
+if __name__ == "__main__":\n\
+    app.run(host="0.0.0.0", port=8080)' > app.py
+
+CMD ["python", "app.py"]
