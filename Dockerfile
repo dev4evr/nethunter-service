@@ -1,10 +1,6 @@
-FROM ubuntu:22.04
+FROM ngrok/ngrok:latest
 
-RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/*
+# ضع التوكن الخاص بك بين علامتي التنصيص بدلاً من YOUR_AUTHTOKEN
+ENV NGROK_AUTHTOKEN="2w5IRycFQhPA2WLWjtRPKWRbG3n_3oLA93n88Ep5qPoL4sdg7"
 
-RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
-    unzip ngrok-stable-linux-amd64.zip && \
-    mv ngrok /usr/local/bin/ && \
-    rm ngrok-stable-linux-amd64.zip
-
-CMD ["ngrok", "http", "4444"]
+CMD ["http", "4444"]
