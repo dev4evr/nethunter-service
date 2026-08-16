@@ -1,7 +1,7 @@
 FROM cloudflare/cloudflared:latest
 
-# نضيف تطبيق بسيط يستمع على المنفذ 8000 عشان Koyeb يرضى
 RUN apt-get update && apt-get install -y python3
+
 RUN echo "from http.server import HTTPServer, BaseHTTPRequestHandler\n\
 class Handler(BaseHTTPRequestHandler):\n\
     def do_GET(self):\n\
